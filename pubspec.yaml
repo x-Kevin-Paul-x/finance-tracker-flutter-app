@@ -1,0 +1,25 @@
+name: flutter_haiku
+description: A minimalist finance tracker (PocketFlow) - scaffold created from README.
+publish_to: 'none'
+version: 0.1.0
+environment:
+  sdk: '>=2.18.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  sqflite: ^2.0.0+4
+  path_provider: ^2.0.0
+  path: ^1.8.0
+  fl_chart: ^0.65.0
+  intl: ^0.18.0
+  font_awesome_flutter: ^10.6.0
+  uuid: ^4.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
