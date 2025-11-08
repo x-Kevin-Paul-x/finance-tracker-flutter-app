@@ -25,20 +25,25 @@ class TransactionCard extends StatelessWidget {
         child: const Icon(Icons.delete, color: Colors.white),
       ),
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6, offset: const Offset(0, 3))],
-        ),
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          leading: CircleAvatar(
-            backgroundColor: isIncome ? AppTheme.income.withOpacity(0.12) : AppTheme.expense.withOpacity(0.12),
-            child: Text(tx.category.isNotEmpty ? tx.category[0].toUpperCase() : '?', style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense)),
-          ),
-          title: Text(tx.category, style: const TextStyle(fontWeight: FontWeight.w600)),
-          subtitle: Text('${DateFormat.yMMMd().format(date)} • ${tx.note ?? ''}', style: const TextStyle(color: Colors.grey)),
-          trailing: Text((isIncome ? '+ ' : '- ') + fmt.format(tx.amount), style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense, fontWeight: FontWeight.w700)),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: isIncome ? AppTheme.income.withOpacity(0.12) : AppTheme.expense.withOpacity(0.12),
+              child: Text(tx.category.isNotEmpty ? tx.category[0].toUpperCase() : '?', style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense)),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(tx.note ?? tx.category, style: const TextStyle(fontWeight: FontWeight.w600)),
+                  Text(DateFormat.yMMMd().format(date), style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                ],
+              ),
+            ),
+            Text((isIncome ? '+ ' : '- ') + fmt.format(tx.amount), style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense, fontWeight: FontWeight.w700)),
+          ],
         ),
       ),
     );

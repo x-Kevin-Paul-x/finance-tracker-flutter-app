@@ -13,12 +13,13 @@ class CategoryModel {
     required this.type,
   });
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap({int? sortOrder}) => {
         'id': id,
         'name': name,
         'icon': icon,
         'color': color,
         'type': type,
+        'sortOrder': sortOrder,
       };
 
   factory CategoryModel.fromMap(Map<String, dynamic> m) => CategoryModel(

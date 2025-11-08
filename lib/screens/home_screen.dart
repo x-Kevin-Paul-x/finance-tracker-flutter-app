@@ -13,10 +13,17 @@ class HomeScreen extends StatelessWidget {
     final provider = Provider.of<FinanceProvider>(context);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('PocketFlow'),
-        centerTitle: true,
+        title: const Text('PocketFlow', style: TextStyle(fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: SafeArea(
         child: RefreshIndicator(
@@ -27,6 +34,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const SizedBox(height: 56), // To account for the transparent app bar
                 BalanceCard(balance: provider.balance, monthlyExpense: provider.monthlyTotal(type: 'expense'), monthlyIncome: provider.monthlyTotal(type: 'income')),
                 const SizedBox(height: 16),
 

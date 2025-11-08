@@ -45,7 +45,8 @@ class DatabaseService {
         name TEXT NOT NULL,
         icon TEXT NOT NULL,
         color TEXT NOT NULL,
-        type TEXT NOT NULL
+        type TEXT NOT NULL,
+        sortOrder INTEGER
       );
     ''');
   }
@@ -72,6 +73,21 @@ class DatabaseService {
     }
     final database = await db;
     return await database.delete(table, where: where, whereArgs: args);
+  }
+
+  Future<int> update(String table, Map<String, dynamic> values, {String? where, List<dynamic>? whereArgs}) async {
+    if (kIsWeb) {
+      if (!_memory.containsKey(table)) return 0;
+      final id = whereArgs?.isNotEmpty == true ? whereArgs![0] : null;
+      final idx = _memory[table]!.indexWhere((m) => m['id'] == id);
+      if (idx != -1) {
+        _memory[table]![idx].addAll(values);
+        return 1;
+      }
+      return 0;
+    }
+    final database = await db;
+    return await database.update(table, values, where: where, whereArgs: whereArgs);
   }
 
   Future<List<Map<String, dynamic>>> query(String table,
