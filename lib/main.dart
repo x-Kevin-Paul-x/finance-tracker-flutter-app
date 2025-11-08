@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'providers/finance_provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/insights_screen.dart';
+import 'screens/history_screen.dart';
+import 'screens/manage_categories_screen.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
@@ -27,7 +29,9 @@ class _PocketFlowAppState extends State<PocketFlowApp> {
 
   static const List<Widget> _pages = [
     HomeScreen(),
+    HistoryScreen(),
     InsightsScreen(),
+    ManageCategoriesScreen(),
   ];
 
   @override
@@ -43,7 +47,9 @@ class _PocketFlowAppState extends State<PocketFlowApp> {
           onTap: (i) => setState(() => _index = i),
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
             BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Insights'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           ],
         ),
       ),

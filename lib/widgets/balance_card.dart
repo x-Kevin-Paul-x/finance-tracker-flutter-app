@@ -14,7 +14,7 @@ class BalanceCard extends StatelessWidget {
     final currency = NumberFormat.simpleCurrency();
     return Container(
       decoration: BoxDecoration(
-        gradient: AppTheme.primaryGradient,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 12, offset: const Offset(0, 6))],
       ),
@@ -22,25 +22,22 @@ class BalanceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Current Balance', style: TextStyle(fontSize: 14, color: Colors.white70)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline, color: Colors.white70)),
-            ],
-          ),
+          const Text("This Month's Balance", style: TextStyle(fontSize: 14, color: Colors.grey)),
           const SizedBox(height: 6),
           TweenAnimationBuilder<double>(
             tween: Tween(begin: 0, end: balance),
             duration: const Duration(milliseconds: 800),
-            builder: (context, value, _) => Text(currency.format(value), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+            builder: (context, value, _) => Text(currency.format(value), style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
           ),
           const SizedBox(height: 12),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _miniStat('Income', currency.format(monthlyIncome), AppTheme.income),
-              _miniStat('Expense', currency.format(monthlyExpense), AppTheme.expense),
+              Expanded(
+                child: _miniStat('Total Income', currency.format(monthlyIncome), AppTheme.income, Icons.arrow_upward),
+              ),
+              Expanded(
+                child: _miniStat('Total Expenses', currency.format(monthlyExpense), AppTheme.expense, Icons.arrow_downward),
+              ),
             ],
           ),
         ],
@@ -48,12 +45,18 @@ class BalanceCard extends StatelessWidget {
     );
   }
 
-  Widget _miniStat(String label, String value, Color color) => Column(
+  Widget _miniStat(String label, String value, Color color, IconData icon) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(fontSize: 12, color: Colors.white70)),
+          Row(
+            children: [
+              Icon(icon, color: color, size: 16),
+              const SizedBox(width: 4),
+              Text(label, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            ],
+          ),
           const SizedBox(height: 4),
-          Text(value, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: color)),
+          Text(value, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
         ],
       );
 }

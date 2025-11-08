@@ -12,30 +12,38 @@ class FinanceProvider extends ChangeNotifier {
   List<CategoryModel> get categories => List.unmodifiable(_categories);
 
   Future<void> init() async {
-    // Load default categories (basic set) and existing rows.
-    _loadDefaultCategories();
     await _loadFromDb();
   }
 
-  void _loadDefaultCategories() {
-    if (_categories.isNotEmpty) return;
-    _categories.addAll([
-      CategoryModel(id: 'food', name: 'Food & Dining', icon: '🍔', color: '#F97316', type: 'expense'),
-      CategoryModel(id: 'transport', name: 'Transport', icon: '🚗', color: '#60A5FA', type: 'expense'),
-      CategoryModel(id: 'housing', name: 'Housing', icon: '🏠', color: '#A78BFA', type: 'expense'),
-      CategoryModel(id: 'ent', name: 'Entertainment', icon: '🎮', color: '#F472B6', type: 'expense'),
-      CategoryModel(id: 'income', name: 'Income', icon: '💰', color: '#10B981', type: 'income'),
-      CategoryModel(id: 'subscriptions', name: 'Subscriptions', icon: '📱', color: '#F97316', type: 'expense'),
-    ]);
-  }
-
   Future<void> _loadFromDb() async {
-    // Load categories from DB if present (not yet persisting defaults for simplicity)
     final txRows = await _db.query('transactions', orderBy: 'date DESC');
     _transactions.clear();
     for (final r in txRows) {
       _transactions.add(TransactionModel.fromMap(r));
     }
+
+    final catRows = await _db.query('categories', orderBy: 'sortOrder');
+    _categories.clear();
+    if (catRows.isEmpty) {
+      // Create default categories
+      _categories.addAll([
+        CategoryModel(id: 'food', name: 'Food & Dining', icon: '🍔', color: '#F97316', type: 'expense'),
+        CategoryModel(id: 'transport', name: 'Transport', icon: '🚗', color: '#60A5FA', type: 'expense'),
+        CategoryModel(id: 'housing', name: 'Housing', icon: '🏠', color: '#A78BFA', type: 'expense'),
+        CategoryModel(id: 'ent', name: 'Entertainment', icon: '🎮', color: '#F472B6', type: 'expense'),
+        CategoryModel(id: 'income', name: 'Income', icon: '💰', color: '#10B981', type: 'income'),
+        CategoryModel(id: 'subscriptions', name: 'Subscriptions', icon: '📱', color: '#F97316', type: 'expense'),
+      ]);
+      for (int i = 0; i < _categories.length; i++) {
+        var c = _categories[i];
+        await _db.insert('categories', c.toMap(sortOrder: i));
+      }
+    } else {
+      for (final r in catRows) {
+        _categories.add(CategoryModel.fromMap(r));
+      }
+    }
+
     notifyListeners();
   }
 
@@ -61,6 +69,37 @@ class FinanceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> addCategory(CategoryModel cat) async {
+    await _db.insert('categories', cat.toMap(sortOrder: _categories.length));
+    _categories.add(cat);
+    notifyListeners();
+  }
+
+  Future<void> updateCategory(CategoryModel cat) async {
+    await _db.update('categories', cat.toMap(), where: 'id = ?', whereArgs: [cat.id]);
+    final idx = _categories.indexWhere((c) => c.id == cat.id);
+    if (idx != -1) {
+      _categories[idx] = cat;
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteCategory(String id) async {
+    await _db.delete('categories', 'id = ?', [id]);
+    _categories.removeWhere((c) => c.id == id);
+    notifyListeners();
+  }
+
+  Future<void> reorderCategories(int oldIndex, int newIndex) async {
+    final cat = _categories.removeAt(oldIndex);
+    _categories.insert(newIndex, cat);
+    // Update sortOrder in DB
+    for (int i = 0; i < _categories.length; i++) {
+      await _db.update('categories', {'sortOrder': i}, where: 'id = ?', whereArgs: [_categories[i].id]);
+    }
+    notifyListeners();
+  }
+
   double get balance {
     double total = 0.0;
     for (final t in _transactions) {
@@ -80,5 +119,19 @@ class FinanceProvider extends ChangeNotifier {
       }
     }
     return total;
+  }
+
+  Map<int, double> dailyTotals() {
+    final Map<int, double> out = {};
+    final now = DateTime.now();
+    final start = now.subtract(const Duration(days: 30));
+    for (final t in _transactions) {
+      if (t.type != 'expense') continue;
+      final date = DateTime.fromMillisecondsSinceEpoch(t.date);
+      if (date.isBefore(start)) continue;
+      final day = date.day;
+      out[day] = (out[day] ?? 0) + t.amount;
+    }
+    return out;
   }
 }
