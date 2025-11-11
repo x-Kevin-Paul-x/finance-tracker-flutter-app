@@ -1,41 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:pocketflow/theme/color_palettes.dart';
 
 class AppTheme {
-  static const Color primary = Color(0xFF6B4CE6);
-  static const Color primaryLight = Color(0xFF8C74FF);
-  static const Color income = Color(0xFF10B981);
-  static const Color expense = Color(0xFFEF4444);
+  final Palette palette;
 
-  static final Gradient primaryGradient = const LinearGradient(
-    colors: [Color(0xFF6B4CE6), Color(0xFF8C74FF)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+  AppTheme(this.palette);
 
-  static final ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: primary,
-    scaffoldBackgroundColor: const Color(0xFFF6F7FB),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black87,
-      elevation: 0,
-      centerTitle: true,
-    ),
-    cardTheme: CardTheme(
-      color: Colors.white.withOpacity(0.9),
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-    ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: primary,
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-      selectedItemColor: primary,
-      unselectedItemColor: Colors.grey,
-      elevation: 8,
-    ),
-    colorScheme: ColorScheme.fromSeed(seedColor: primary),
-  );
+  ThemeData get lightTheme {
+    return ThemeData(
+      brightness: Brightness.light,
+      primaryColor: palette.primary,
+      scaffoldBackgroundColor: palette.backgroundLight,
+      cardColor: palette.cardLight,
+      appBarTheme: AppBarTheme(
+        backgroundColor: palette.cardLight,
+        foregroundColor: palette.textLightPrimary,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      cardTheme: CardTheme(
+        color: palette.cardLight,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: palette.primary,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: palette.cardLight,
+        selectedItemColor: palette.primary,
+        unselectedItemColor: palette.textLightSecondary,
+        elevation: 8,
+      ),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(color: palette.textLightPrimary),
+        bodyMedium: TextStyle(color: palette.textLightSecondary),
+      ),
+      colorScheme: ColorScheme.light(
+        primary: palette.primary,
+        secondary: palette.primary,
+        surface: palette.cardLight,
+        background: palette.backgroundLight,
+        error: palette.expense,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: palette.textLightPrimary,
+        onBackground: palette.textLightPrimary,
+        onError: Colors.white,
+        brightness: Brightness.light,
+      ),
+    );
+  }
+
+  ThemeData get darkTheme {
+    return ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: palette.primary,
+      scaffoldBackgroundColor: palette.backgroundDark,
+      cardColor: palette.cardDark,
+      appBarTheme: AppBarTheme(
+        backgroundColor: palette.backgroundDark,
+        foregroundColor: palette.textDarkPrimary,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      cardTheme: CardTheme(
+        color: palette.cardDark,
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: palette.primary,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: palette.cardDark,
+        selectedItemColor: palette.primary,
+        unselectedItemColor: palette.textDarkSecondary,
+        elevation: 8,
+      ),
+      textTheme: TextTheme(
+        bodyLarge: TextStyle(color: palette.textDarkPrimary),
+        bodyMedium: TextStyle(color: palette.textDarkSecondary),
+      ),
+      colorScheme: ColorScheme.dark(
+        primary: palette.primary,
+        secondary: palette.primary,
+        surface: palette.cardDark,
+        background: palette.backgroundDark,
+        error: palette.expense,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: palette.textDarkPrimary,
+        onBackground: palette.textDarkPrimary,
+        onError: Colors.white,
+        brightness: Brightness.dark,
+      ),
+    );
+  }
 }
