@@ -25,15 +25,7 @@ A beautiful, minimalist personal finance tracker built with Flutter. Visualize y
 
 ## Screenshots
 
-| Dashboard (Light) | Dashboard (Dark) | Add Transaction |
-|:-----------------:|:----------------:|:---------------:|
-| ![Dashboard Light](docs/screenshots/dashboard_light.png) | ![Dashboard Dark](docs/screenshots/dashboard_dark.png) | ![Add Transaction](docs/screenshots/add_transaction.png) |
-
-| Insights | History |
-|:--------:|:-------:|
-| ![Insights](docs/screenshots/insights.png) | ![History](docs/screenshots/history.png) |
-
-> *Note: Screenshots are placeholders. Run the app to see it in action!*
+> *Screenshots are currently unavailable in this repository preview. Please build and run the app to see the Glassmorphic UI in action!*
 
 ## Getting Started
 
