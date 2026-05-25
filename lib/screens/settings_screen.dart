@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_haiku/providers/theme_provider.dart';
 import 'package:flutter_haiku/theme/color_palettes.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -18,44 +19,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = Theme.of(context);
+    final palette = themeProvider.palette;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text('Settings', style: GoogleFonts.playfairDisplay(fontWeight: FontWeight.w600)),
         elevation: 0,
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: Colors.transparent,
         foregroundColor: theme.textTheme.bodyLarge?.color,
       ),
-      body: ListView(
-        children: [
-          _buildSectionHeader(context, 'Appearance'),
-          _buildAppearanceSection(context, themeProvider),
-          _buildSectionHeader(context, 'Notifications'),
-          _buildNotificationsSection(context),
-          _buildSectionHeader(context, 'Data'),
-          _buildDataSection(context),
-          _buildSectionHeader(context, 'About'),
-          _buildAboutSection(context),
-          const SizedBox(height: 20),
-          Center(
-            child: Text(
-              'Haiku Finance v1.2.0',
-              style: TextStyle(color: theme.textTheme.bodyMedium?.color),
-            ),
+      body: Container(
+         decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: Theme.of(context).brightness == Brightness.dark
+                ? [palette.backgroundDark, palette.backgroundDark.withOpacity(0.8), palette.primary.withOpacity(0.1)]
+                : [palette.backgroundLight, palette.backgroundLight, palette.primary.withOpacity(0.05)],
           ),
-        ],
+        ),
+        child: ListView(
+          children: [
+            _buildSectionHeader(context, 'Appearance'),
+            _buildAppearanceSection(context, themeProvider),
+            _buildSectionHeader(context, 'Notifications'),
+            _buildNotificationsSection(context),
+            _buildSectionHeader(context, 'Data'),
+            _buildDataSection(context),
+            _buildSectionHeader(context, 'About'),
+            _buildAboutSection(context),
+            const SizedBox(height: 20),
+            Center(
+              child: Text(
+                'Haiku Finance v1.2.0',
+                style: GoogleFonts.inter(color: theme.textTheme.bodyMedium?.color, fontSize: 12),
+              ),
+            ),
+             const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSectionHeader(BuildContext context, String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
       child: Text(
         title.toUpperCase(),
-        style: TextStyle(
+        style: GoogleFonts.inter(
           fontWeight: FontWeight.bold,
           color: Theme.of(context).textTheme.bodyMedium?.color,
+          letterSpacing: 1.2,
+          fontSize: 12
         ),
       ),
     );
@@ -78,22 +94,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildThemeModeTile(
       BuildContext context, ThemeProvider themeProvider) {
     return ListTile(
-      leading: const Icon(Icons.brightness_6),
-      title: const Text('Theme Mode'),
+      leading: const Icon(Icons.brightness_6_outlined),
+      title: Text('Theme Mode', style: GoogleFonts.inter()),
       trailing: DropdownButton<ThemeMode>(
         value: themeProvider.themeMode,
-        items: const [
+        underline: const SizedBox(),
+        items: [
           DropdownMenuItem(
             value: ThemeMode.system,
-            child: Text('System'),
+            child: Text('System', style: GoogleFonts.inter()),
           ),
           DropdownMenuItem(
             value: ThemeMode.light,
-            child: Text('Light'),
+            child: Text('Light', style: GoogleFonts.inter()),
           ),
           DropdownMenuItem(
             value: ThemeMode.dark,
-            child: Text('Dark'),
+            child: Text('Dark', style: GoogleFonts.inter()),
           ),
         ],
         onChanged: (mode) {
@@ -108,14 +125,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildColorPaletteTile(
       BuildContext context, ThemeProvider themeProvider) {
     return ListTile(
-      leading: const Icon(Icons.color_lens),
-      title: const Text('Color Palette'),
+      leading: const Icon(Icons.color_lens_outlined),
+      title: Text('Color Palette', style: GoogleFonts.inter()),
       trailing: DropdownButton<Palette>(
         value: themeProvider.palette,
+         underline: const SizedBox(),
         items: AppPalettes.allPalettes.map((palette) {
           return DropdownMenuItem(
             value: palette,
-            child: Text(palette.name),
+            child: Text(palette.name, style: GoogleFonts.inter()),
           );
         }).toList(),
         onChanged: (palette) {
@@ -133,8 +151,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Column(
         children: [
           SwitchListTile(
-            secondary: const Icon(Icons.notifications),
-            title: const Text('Spending Alerts'),
+            secondary: const Icon(Icons.notifications_outlined),
+            title: Text('Spending Alerts', style: GoogleFonts.inter()),
             value: _spendingAlerts,
             onChanged: (value) {
               setState(() {
@@ -144,8 +162,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const Divider(height: 1),
           SwitchListTile(
-            secondary: const Icon(Icons.calendar_month),
-            title: const Text('Weekly Summary'),
+            secondary: const Icon(Icons.calendar_month_outlined),
+            title: Text('Weekly Summary', style: GoogleFonts.inter()),
             value: _weeklySummary,
             onChanged: (value) {
               setState(() {
@@ -165,14 +183,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           ListTile(
             leading: const Icon(Icons.ios_share),
-            title: const Text('Export Data'),
+            title: Text('Export Data', style: GoogleFonts.inter()),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showSnackbar(context, 'Export Data'),
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.category),
-            title: const Text('Manage Categories'),
+            leading: const Icon(Icons.category_outlined),
+            title: Text('Manage Categories', style: GoogleFonts.inter()),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showSnackbar(context, 'Manage Categories'),
           ),
@@ -188,21 +206,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           ListTile(
             leading: const Icon(Icons.help_outline),
-            title: const Text('Help & Support'),
+            title: Text('Help & Support', style: GoogleFonts.inter()),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showSnackbar(context, 'Help & Support'),
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.privacy_tip),
-            title: const Text('Privacy Policy'),
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: Text('Privacy Policy', style: GoogleFonts.inter()),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showSnackbar(context, 'Privacy Policy'),
           ),
           const Divider(height: 1),
           ListTile(
-            leading: const Icon(Icons.description),
-            title: const Text('Terms of Service'),
+            leading: const Icon(Icons.description_outlined),
+            title: Text('Terms of Service', style: GoogleFonts.inter()),
             trailing: const Icon(Icons.chevron_right),
             onTap: () => _showSnackbar(context, 'Terms of Service'),
           ),
@@ -214,7 +232,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showSnackbar(BuildContext context, String feature) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$feature is not yet implemented.'),
+        content: Text('$feature is not yet implemented.', style: GoogleFonts.inter()),
         duration: const Duration(seconds: 2),
       ),
     );

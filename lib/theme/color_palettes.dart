@@ -1,76 +1,60 @@
 import 'package:flutter/material.dart';
 
 // Defines a collection of color palettes for the app theme.
+// Updated for a more muted, sophisticated, and artistic aesthetic.
 class AppPalettes {
-  // The default color palette.
+  // The default color palette (Muted Purple)
   static const Palette defaultPalette = Palette(
-    name: 'Default',
-    primary: Color(0xFF5D3FD3),
-    backgroundLight: Color(0xFFF4F6F8),
-    backgroundDark: Color(0xFF141121),
+    name: 'Twilight',
+    primary: Color(0xFF7B61FF), // Softer purple
+    backgroundLight: Color(0xFFF8F9FA), // Off-white, softer than pure white
+    backgroundDark: Color(0xFF0F0E17), // Deep charcoal/blue-black
     cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1D192C),
-    textLightPrimary: Color(0xFF1A1A1A),
-    textDarkPrimary: Color(0xFFFFFFFF),
-    textLightSecondary: Color(0xFF6c757d),
-    textDarkSecondary: Color(0xFFa0aec0),
-    income: Color(0xFF2ECC71),
-    expense: Color(0xFFE74C3C),
+    cardDark: Color(0xFF16161E), // Slightly lighter than background, very subtle
+    textLightPrimary: Color(0xFF2D3142), // Not quite black
+    textDarkPrimary: Color(0xFFE0E6ED), // Soft white
+    textLightSecondary: Color(0xFF9098A9),
+    textDarkSecondary: Color(0xFF8A93A6),
+    income: Color(0xFF34D399), // Muted emerald
+    expense: Color(0xFFFB7185), // Soft rose/coral
   );
 
-  // A green-themed color palette.
+  // A green-themed color palette (Sage/Earthy)
   static const Palette greenPalette = Palette(
-    name: 'Green',
-    primary: Color(0xFF48BB78),
-    backgroundLight: Color(0xFFF7F8FA),
-    backgroundDark: Color(0xFF141121),
+    name: 'Sage',
+    primary: Color(0xFF5CA482), // Sage green
+    backgroundLight: Color(0xFFF4F7F6), // Very light greenish-grey
+    backgroundDark: Color(0xFF111413), // Deep forest black
     cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1C182F),
-    textLightPrimary: Color(0xFF2D3748),
+    cardDark: Color(0xFF1A1F1D),
+    textLightPrimary: Color(0xFF2C3E38),
     textDarkPrimary: Color(0xFFE2E8F0),
-    textLightSecondary: Color(0xFFA0AEC0),
+    textLightSecondary: Color(0xFF8BA39A),
     textDarkSecondary: Color(0xFF718096),
-    income: Color(0xFF48BB78),
-    expense: Color(0xFFE53E3E),
+    income: Color(0xFF5CA482),
+    expense: Color(0xFFE07A5F), // Terracotta
   );
 
-  // A purple-themed color palette.
-  static const Palette purplePalette = Palette(
-    name: 'Purple',
-    primary: Color(0xFF6a4be7),
-    backgroundLight: Color(0xFFf6f6f8),
-    backgroundDark: Color(0xFF141121),
-    cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1f1a32),
-    textLightPrimary: Color(0xFF1A1A1A),
-    textDarkPrimary: Color(0xFFFFFFFF),
-    textLightSecondary: Color(0xFF6c757d),
-    textDarkSecondary: Color(0xFF9e94c7),
-    income: Color(0xFF0bda6c),
-    expense: Color(0xFFff5c5c),
-  );
-
-  // A blue-themed color palette.
+  // A blue-themed color palette (Ocean/Mist)
   static const Palette bluePalette = Palette(
-    name: 'Blue',
-    primary: Color(0xFF4A90E2),
-    backgroundLight: Color(0xFFF9F9F9),
-    backgroundDark: Color(0xFF141121),
+    name: 'Mist',
+    primary: Color(0xFF5E81AC), // Nordic blue
+    backgroundLight: Color(0xFFF5F7FA), // Light cool grey
+    backgroundDark: Color(0xFF141824), // Deep navy
     cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1d1933),
-    textLightPrimary: Color(0xFF212121),
-    textDarkPrimary: Color(0xFFFFFFFF),
-    textLightSecondary: Color(0xFF888888),
-    textDarkSecondary: Color(0xFF9e94c7),
-    income: Color(0xFF50C878),
-    expense: Color(0xFFE94E77),
+    cardDark: Color(0xFF1C2130),
+    textLightPrimary: Color(0xFF2E3440),
+    textDarkPrimary: Color(0xFFECEFF4),
+    textLightSecondary: Color(0xFF8A98B0),
+    textDarkSecondary: Color(0xFF7A869A),
+    income: Color(0xFF81A1C1), // Soft blue-green
+    expense: Color(0xFFBF616A), // Muted red
   );
 
   // A list of all available color palettes.
   static const List<Palette> allPalettes = [
     defaultPalette,
     greenPalette,
-    purplePalette,
     bluePalette,
   ];
 }
