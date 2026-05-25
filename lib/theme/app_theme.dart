@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pocketflow/theme/color_palettes.dart';
+import 'package:flutter_haiku/theme/color_palettes.dart';
 
 class AppTheme {
   final Palette palette;

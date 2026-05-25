@@ -22,7 +22,7 @@ class DatabaseService {
   Future<Database> _init() async {
     if (kIsWeb) throw StateError('Database initialization not supported on web');
     final databasePath = await getDatabasesPath();
-    final path = join(databasePath, 'pocketflow.db');
+    final path = join(databasePath, 'haiku_finance.db');
     return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 

@@ -4,6 +4,7 @@ import '../providers/finance_provider.dart';
 import '../widgets/balance_card.dart';
 import '../widgets/transaction_card.dart';
 import '../widgets/add_transaction_sheet.dart';
+import '../widgets/haiku_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('PocketFlow', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Haiku Finance', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -36,6 +37,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: 56), // To account for the transparent app bar
                 BalanceCard(balance: provider.balance, monthlyExpense: provider.monthlyTotal(type: 'expense'), monthlyIncome: provider.monthlyTotal(type: 'income')),
+                const SizedBox(height: 16),
+                const HaikuCard(),
                 const SizedBox(height: 16),
 
                 const Text('Recent Transactions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),

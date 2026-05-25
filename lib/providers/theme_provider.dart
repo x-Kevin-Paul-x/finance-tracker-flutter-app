@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pocketflow/theme/color_palettes.dart';
-import 'package:pocketflow/theme/app_theme.dart';
+import 'package:flutter_haiku/theme/color_palettes.dart';
+import 'package:flutter_haiku/theme/app_theme.dart';
 
 class ThemeProvider with ChangeNotifier {
   static const String _themeModeKey = 'themeMode';

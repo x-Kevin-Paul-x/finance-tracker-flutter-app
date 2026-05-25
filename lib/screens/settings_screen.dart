@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pocketflow/providers/theme_provider.dart';
-import 'package:pocketflow/theme/color_palettes.dart';
+import 'package:flutter_haiku/providers/theme_provider.dart';
+import 'package:flutter_haiku/theme/color_palettes.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -39,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 20),
           Center(
             child: Text(
-              'PocketFlow v1.2.0',
+              'Haiku Finance v1.2.0',
               style: TextStyle(color: theme.textTheme.bodyMedium?.color),
             ),
           ),
