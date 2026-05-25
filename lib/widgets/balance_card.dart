@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../theme/app_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_haiku/providers/theme_provider.dart';
 
 class BalanceCard extends StatelessWidget {
   final double balance;
@@ -11,6 +12,7 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final currency = NumberFormat.simpleCurrency();
     return Container(
       decoration: BoxDecoration(
@@ -33,10 +35,10 @@ class BalanceCard extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _miniStat('Total Income', currency.format(monthlyIncome), AppTheme.income, Icons.arrow_upward),
+                child: _miniStat('Total Income', currency.format(monthlyIncome), themeProvider.palette.income, Icons.arrow_upward),
               ),
               Expanded(
-                child: _miniStat('Total Expenses', currency.format(monthlyExpense), AppTheme.expense, Icons.arrow_downward),
+                child: _miniStat('Total Expenses', currency.format(monthlyExpense), themeProvider.palette.expense, Icons.arrow_downward),
               ),
             ],
           ),

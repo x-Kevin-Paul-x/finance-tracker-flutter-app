@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/transaction.dart';
 import '../providers/finance_provider.dart';
+import 'package:flutter_haiku/providers/theme_provider.dart';
 import 'package:intl/intl.dart';
 
 class AddTransactionSheet extends StatefulWidget {
@@ -30,6 +31,9 @@ class _AddTransactionSheetState extends State<AddTransactionSheet> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<FinanceProvider>(context, listen: false);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final palette = themeProvider.palette;
+    
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
@@ -57,9 +61,9 @@ class _AddTransactionSheetState extends State<AddTransactionSheet> {
                 decoration: InputDecoration(
                   labelText: 'Amount',
                   prefixText: '\$',
-                  prefixStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _type == 'expense' ? Colors.red : Colors.green),
+                  prefixStyle: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _type == 'expense' ? palette.expense : palette.income),
                 ),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _type == 'expense' ? Colors.red : Colors.green),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: _type == 'expense' ? palette.expense : palette.income),
                 validator: (v) => (v == null || v.isEmpty) ? 'Enter amount' : null,
               ),
               const SizedBox(height: 16),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
-import '../theme/app_theme.dart';
+import 'package:flutter_haiku/providers/theme_provider.dart';
 
 class TransactionCard extends StatelessWidget {
   final TransactionModel tx;
@@ -14,6 +15,7 @@ class TransactionCard extends StatelessWidget {
     final fmt = NumberFormat.simpleCurrency();
     final date = DateTime.fromMillisecondsSinceEpoch(tx.date);
     final isIncome = tx.type == 'income';
+  final themeProvider = Provider.of<ThemeProvider>(context);
     return Dismissible(
       key: ValueKey(tx.id),
       direction: DismissDirection.endToStart,
@@ -29,8 +31,8 @@ class TransactionCard extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: isIncome ? AppTheme.income.withOpacity(0.12) : AppTheme.expense.withOpacity(0.12),
-              child: Text(tx.category.isNotEmpty ? tx.category[0].toUpperCase() : '?', style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense)),
+              backgroundColor: isIncome ? themeProvider.palette.income.withOpacity(0.12) : themeProvider.palette.expense.withOpacity(0.12),
+              child: Text(tx.category.isNotEmpty ? tx.category[0].toUpperCase() : '?', style: TextStyle(color: isIncome ? themeProvider.palette.income : themeProvider.palette.expense)),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -42,7 +44,7 @@ class TransactionCard extends StatelessWidget {
                 ],
               ),
             ),
-            Text((isIncome ? '+ ' : '- ') + fmt.format(tx.amount), style: TextStyle(color: isIncome ? AppTheme.income : AppTheme.expense, fontWeight: FontWeight.w700)),
+            Text((isIncome ? '+ ' : '- ') + fmt.format(tx.amount), style: TextStyle(color: isIncome ? themeProvider.palette.income : themeProvider.palette.expense, fontWeight: FontWeight.w700)),
           ],
         ),
       ),
