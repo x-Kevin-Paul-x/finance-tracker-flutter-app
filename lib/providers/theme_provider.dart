@@ -35,6 +35,14 @@ class ThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleTheme() {
+    if (_themeMode == ThemeMode.dark) {
+      setThemeMode(ThemeMode.light);
+    } else {
+      setThemeMode(ThemeMode.dark);
+    }
+  }
+
   void setPalette(Palette newPalette) async {
     _palette = newPalette;
     final prefs = await SharedPreferences.getInstance();

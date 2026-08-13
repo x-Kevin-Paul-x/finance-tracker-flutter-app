@@ -1,70 +1,108 @@
 import 'package:flutter/material.dart';
 
-// Defines a collection of color palettes for the app theme.
-// Updated for a more muted, sophisticated, and artistic aesthetic.
+// Defines the 3 core artistic styles for the app:
+// 1. Art Nouveau (Jaipur Base)
+// 2. Royal Peacock Style
+// 3. Chola Tamil Style
 class AppPalettes {
-  // The default color palette (Muted Purple)
-  static const Palette defaultPalette = Palette(
-    name: 'Twilight',
-    primary: Color(0xFF7B61FF), // Softer purple
-    backgroundLight: Color(0xFFF8F9FA), // Off-white, softer than pure white
-    backgroundDark: Color(0xFF0F0E17), // Deep charcoal/blue-black
+  // 1. Base / Default: Jaipur Art Nouveau Theme
+  static const Palette nouveauStyle = Palette(
+    name: 'Art Nouveau Style',
+    subtitle: 'Jaipur Gold & Terracotta Fine Art',
+    primary: Color(0xFFC85A17), // Terracotta Spice
+    accentColor: Color(0xFFD4AF37), // Royal Gold
+    backgroundLight: Color(0xFFFAF6EE),
+    backgroundDark: Color(0xFF0F0B09),
     cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF16161E), // Slightly lighter than background, very subtle
-    textLightPrimary: Color(0xFF2D3142), // Not quite black
-    textDarkPrimary: Color(0xFFE0E6ED), // Soft white
-    textLightSecondary: Color(0xFF9098A9),
-    textDarkSecondary: Color(0xFF8A93A6),
-    income: Color(0xFF34D399), // Muted emerald
-    expense: Color(0xFFFB7185), // Soft rose/coral
+    cardDark: Color(0xFF1B1411), // Obsidian Velvet
+    textLightPrimary: Color(0xFF2B1D18),
+    textDarkPrimary: Color(0xFFFFFFFF),
+    textLightSecondary: Color(0xFF8C7164),
+    textDarkSecondary: Color(0xFFD4C5B9),
+    income: Color(0xFF107C41),
+    expense: Color(0xFFC0392B),
+    darkBgAsset: 'assets/images/art_nouveau_app_bg.jpg',
+    lightBgAsset: 'assets/images/art_nouveau_light_bg.jpg',
+    buttonGradient: LinearGradient(
+      colors: [Color(0xFFD95F1E), Color(0xFFB7410E), Color(0xFF8B2B05)],
+    ),
+    goldBorderColor: Color(0xFFD4AF37),
+    gradientFallbackDark: [Color(0xFF1E140F), Color(0xFF120C0A), Color(0xFF0A0706)],
+    gradientFallbackLight: [Color(0xFFFAF6F0), Color(0xFFF3EBE1), Color(0xFFE8DCCF)],
   );
 
-  // A green-themed color palette (Sage/Earthy)
-  static const Palette greenPalette = Palette(
-    name: 'Sage',
-    primary: Color(0xFF5CA482), // Sage green
-    backgroundLight: Color(0xFFF4F7F6), // Very light greenish-grey
-    backgroundDark: Color(0xFF111413), // Deep forest black
+  // 2. Royal Peacock Style (Teal, Cyan Glow & Gold)
+  static const Palette peacockStyle = Palette(
+    name: 'Royal Peacock Style',
+    subtitle: 'Deep Peacock Teal & Saffron Gold',
+    primary: Color(0xFF0F5257), // Peacock Teal
+    accentColor: Color(0xFF00E5FF), // Peacock Cyan Glow
+    backgroundLight: Color(0xFFF2F9F9),
+    backgroundDark: Color(0xFF091417),
     cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1A1F1D),
-    textLightPrimary: Color(0xFF2C3E38),
-    textDarkPrimary: Color(0xFFE2E8F0),
-    textLightSecondary: Color(0xFF8BA39A),
-    textDarkSecondary: Color(0xFF718096),
-    income: Color(0xFF5CA482),
-    expense: Color(0xFFE07A5F), // Terracotta
+    cardDark: Color(0xFF102025), // Peacock Dark Velvet
+    textLightPrimary: Color(0xFF0D2529),
+    textDarkPrimary: Color(0xFFE2F8FA),
+    textLightSecondary: Color(0xFF5A7B82),
+    textDarkSecondary: Color(0xFF8BB5BD),
+    income: Color(0xFF00BFA5), // Peacock Emerald
+    expense: Color(0xFFE65100), // Saffron Fire
+    darkBgAsset: 'assets/images/peacock_teal_dark_bg.jpg',
+    lightBgAsset: 'assets/images/peacock_teal_light_bg.jpg',
+    buttonGradient: LinearGradient(
+      colors: [Color(0xFF00838F), Color(0xFF005662), Color(0xFF002F35)],
+    ),
+    goldBorderColor: Color(0xFF00E5FF),
+    gradientFallbackDark: [Color(0xFF0F2B30), Color(0xFF0A1C20), Color(0xFF050E10)],
+    gradientFallbackLight: [Color(0xFFE0F7FA), Color(0xFFB2EBF2), Color(0xFF80DEEA)],
   );
 
-  // A blue-themed color palette (Ocean/Mist)
-  static const Palette bluePalette = Palette(
-    name: 'Mist',
-    primary: Color(0xFF5E81AC), // Nordic blue
-    backgroundLight: Color(0xFFF5F7FA), // Light cool grey
-    backgroundDark: Color(0xFF141824), // Deep navy
-    cardLight: Color(0xFFFFFFFF),
-    cardDark: Color(0xFF1C2130),
-    textLightPrimary: Color(0xFF2E3440),
-    textDarkPrimary: Color(0xFFECEFF4),
-    textLightSecondary: Color(0xFF8A98B0),
-    textDarkSecondary: Color(0xFF7A869A),
-    income: Color(0xFF81A1C1), // Soft blue-green
-    expense: Color(0xFFBF616A), // Muted red
+  // 3. Chola Tamil Style (Deep Kanchipuram Silk Maroon, Tanjore Temple Garnet & Pure Gold)
+  static const Palette cholaStyle = Palette(
+    name: 'Chola Tamil Style',
+    subtitle: 'Deep Kanchipuram Crimson & Tanjore Temple Gold',
+    primary: Color(0xFF9E1B32), // Tanjore Ruby Crimson
+    accentColor: Color(0xFFFFD700), // Pure Tanjore Temple Gold
+    backgroundLight: Color(0xFFFFF0F3), // Soft Kanchipuram Silk Ivory
+    backgroundDark: Color(0xFF120508), // Deep Chola Temple Velvet
+    cardLight: Color(0xFFFFFDF8), // High Contrast Solid Light Velvet
+    cardDark: Color(0xFF220A10), // Chola Velvet Card Surface
+    textLightPrimary: Color(0xFF3B0812), // Deep Garnet Text
+    textDarkPrimary: Color(0xFFFFF0F3),
+    textLightSecondary: Color(0xFF8C4B57),
+    textDarkSecondary: Color(0xFFE5B5BD),
+    income: Color(0xFF1B5E20), // Tamil Emerald Green
+    expense: Color(0xFFB71C1C), // Temple Red
+    darkBgAsset: 'assets/images/chola_tamil_dark_bg.jpg',
+    lightBgAsset: 'assets/images/chola_tamil_light_bg.jpg',
+    buttonGradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Color(0xFFC62828), Color(0xFF880E4F), Color(0xFF4A0007)],
+    ),
+    goldBorderColor: Color(0xFFFFD700), // Pure Tanjore Gold
+    gradientFallbackDark: [Color(0xFF3D0611), Color(0xFF200308), Color(0xFF0E0103)],
+    gradientFallbackLight: [Color(0xFFFFF0F3), Color(0xFFFCE4EC), Color(0xFFF8BBD0)],
   );
 
-  // A list of all available color palettes.
+  // Alias default to Art Nouveau Style
+  static const Palette defaultPalette = nouveauStyle;
+
   static const List<Palette> allPalettes = [
-    defaultPalette,
-    greenPalette,
-    bluePalette,
+    nouveauStyle,
+    peacockStyle,
+    cholaStyle,
   ];
 }
 
-// Represents a single color palette with specific shades for the app theme.
+// Represents a single color palette with specific shades, assets & fallback gradients.
 @immutable
 class Palette {
   const Palette({
     required this.name,
+    required this.subtitle,
     required this.primary,
+    required this.accentColor,
     required this.backgroundLight,
     required this.backgroundDark,
     required this.cardLight,
@@ -75,10 +113,18 @@ class Palette {
     required this.textDarkSecondary,
     required this.income,
     required this.expense,
+    required this.darkBgAsset,
+    required this.lightBgAsset,
+    required this.buttonGradient,
+    required this.goldBorderColor,
+    required this.gradientFallbackDark,
+    required this.gradientFallbackLight,
   });
 
   final String name;
+  final String subtitle;
   final Color primary;
+  final Color accentColor;
   final Color backgroundLight;
   final Color backgroundDark;
   final Color cardLight;
@@ -89,4 +135,10 @@ class Palette {
   final Color textDarkSecondary;
   final Color income;
   final Color expense;
+  final String darkBgAsset;
+  final String lightBgAsset;
+  final LinearGradient buttonGradient;
+  final Color goldBorderColor;
+  final List<Color> gradientFallbackDark;
+  final List<Color> gradientFallbackLight;
 }
